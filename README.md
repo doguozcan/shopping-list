@@ -28,8 +28,8 @@ The Shopping List application is a simple, interactive web application built wit
 - Install npm packages
   `npm install`
 - Start the application
-  `npm start`
-- Visit <a href="http://localhost:3000">localhost</a> to view the app in your browser.
+  `npm run dev`
+- Visit <a href="http://localhost:5173">localhost</a> to view the app in your browser.
 
 ## Live Preview
 
