@@ -6,11 +6,22 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function ShoppingList() {
   const [items, setItems] = useState([])
   const [newItem, setNewItem] = useState('')
+
+  useEffect(() => {
+    const storedItems = localStorage.getItem('shoppingItems')
+    if (storedItems) {
+      setItems(JSON.parse(storedItems))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('shoppingItems', JSON.stringify(items))
+  }, [items])
 
   const addItem = () => {
     if (!newItem.trim()) return
@@ -49,13 +60,13 @@ export default function ShoppingList() {
   }
 
   return (
-    <div className="bg-[#eba03f] p-3 m-5 rounded-md overflow-y-auto max-h-[550px] max-sm:w-1/3 w-1/2 ">
-      <p className="text-3xl text-center mb-2 text-white uppercase">
+    <div className="bg-[#eba03f] p-3 m-5 rounded-md ">
+      <p className="text-md sm:text-3xl text-center mb-2 text-white uppercase">
         shopping list
       </p>
       <div className="m-2 flex gap-2 justify-center items-center">
         <input
-          className="w-full p-2 border-2 border-[#FFBB64] bg-[#FFBB64] text-white placeholder-white rounded focus:outline-none focus:border-[#f8a63a]"
+          className="text-md sm:text-xl w-full p-2 border-2 border-[#FFBB64] bg-[#FFBB64] text-white placeholder-white rounded focus:outline-none focus:border-[#f8a63a]"
           placeholder="Add item..."
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
@@ -67,7 +78,7 @@ export default function ShoppingList() {
         ></input>
         <button
           onClick={addItem}
-          className="bg-[#FFBB64] hover:bg-[#f8a63a] text-white font-bold p-2 rounded shadow"
+          className="bg-[#FFBB64] hover:bg-[#f8a63a] text-white font-bold p-2 rounded shadow text-md sm:text-xl"
         >
           <FontAwesomeIcon icon={faAdd} />
         </button>
@@ -76,18 +87,22 @@ export default function ShoppingList() {
         <div className="item">
           <div className="flex flex-col">
             {items.map((item) => (
-              <div className="flex justify-between p-2 m-2 bg-[#FFBB64] text-white text-xl rounded-md">
+              <div className="flex justify-between items-center p-2 m-2 bg-[#FFBB64] text-white rounded-md">
                 <button onClick={() => itemBought(item.id)}>
                   <FontAwesomeIcon icon={faCheck} />
                 </button>
-                <p className={`${item.buy ? 'line-through' : ''} capitalize`}>
+                <p
+                  className={`${
+                    item.buy ? 'line-through' : ''
+                  } capitalize text-sm sm:text-2xl`}
+                >
                   {item.name}
                 </p>
                 <div className="flex gap-2 items-center justify-center">
                   <button onClick={() => handleAmount(item.id, -1)}>
                     <FontAwesomeIcon icon={faLeftLong} />
                   </button>
-                  <p>{item.count}</p>
+                  <p className="text-sm sm:text-xl">{item.count}</p>
                   <button onClick={() => handleAmount(item.id, 1)}>
                     <FontAwesomeIcon icon={faRightLong} />
                   </button>
@@ -103,8 +118,8 @@ export default function ShoppingList() {
           </div>
         </div>
         <div className="flex flex-col text-center text-white bg-[#f8a63a] rounded-md p-2 m-2 text-xl gap-1 mt-10">
-          <p>Total items: {items.length}</p>
-          <p>
+          <p className="text-sm sm:text-xl">Total items: {items.length}</p>
+          <p className="text-sm sm:text-xl">
             Total amount: {items.reduce((total, item) => total + item.count, 0)}
           </p>
         </div>
