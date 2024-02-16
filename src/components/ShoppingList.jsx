@@ -60,7 +60,7 @@ export default function ShoppingList() {
   }
 
   return (
-    <div className="bg-[#eba03f] p-3 m-5 rounded-md ">
+    <div className="bg-[#eba03f] p-3 m-5 rounded-md">
       <p className="text-md sm:text-3xl text-center mb-2 text-white uppercase">
         shopping list
       </p>
@@ -83,39 +83,37 @@ export default function ShoppingList() {
           <FontAwesomeIcon icon={faAdd} />
         </button>
       </div>
-      <div className="items">
-        <div className="item">
-          <div className="flex flex-col">
-            {items.map((item) => (
-              <div className="flex justify-between items-center p-2 m-2 bg-[#FFBB64] text-white rounded-md">
-                <button onClick={() => itemBought(item.id)}>
-                  <FontAwesomeIcon icon={faCheck} />
+      <div className="overflow-auto max-h-96">
+        <div className="flex flex-col">
+          {items.map((item) => (
+            <div className="flex justify-between items-center p-2 m-2 bg-[#FFBB64] text-white rounded-md">
+              <button onClick={() => itemBought(item.id)}>
+                <FontAwesomeIcon icon={faCheck} />
+              </button>
+              <p
+                className={`${
+                  item.buy ? 'line-through' : ''
+                } capitalize text-sm sm:text-2xl`}
+              >
+                {item.name}
+              </p>
+              <div className="flex gap-2 items-center justify-center">
+                <button onClick={() => handleAmount(item.id, -1)}>
+                  <FontAwesomeIcon icon={faLeftLong} />
                 </button>
-                <p
-                  className={`${
-                    item.buy ? 'line-through' : ''
-                  } capitalize text-sm sm:text-2xl`}
+                <p className="text-sm sm:text-xl">{item.count}</p>
+                <button onClick={() => handleAmount(item.id, 1)}>
+                  <FontAwesomeIcon icon={faRightLong} />
+                </button>
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className="text-[#eba952] text-sm ml-1"
                 >
-                  {item.name}
-                </p>
-                <div className="flex gap-2 items-center justify-center">
-                  <button onClick={() => handleAmount(item.id, -1)}>
-                    <FontAwesomeIcon icon={faLeftLong} />
-                  </button>
-                  <p className="text-sm sm:text-xl">{item.count}</p>
-                  <button onClick={() => handleAmount(item.id, 1)}>
-                    <FontAwesomeIcon icon={faRightLong} />
-                  </button>
-                  <button
-                    onClick={() => removeItem(item.id)}
-                    className="text-[#eba952] text-sm ml-1"
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </div>
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
         <div className="flex flex-col text-center text-white bg-[#f8a63a] rounded-md p-2 m-2 text-xl gap-1 mt-10">
           <p className="text-sm sm:text-xl">Total items: {items.length}</p>
