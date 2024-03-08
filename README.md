@@ -33,4 +33,4 @@ The Shopping List application is a simple, interactive web application built wit
 
 ## Live Preview
 
-- You can visit <a href="https://aquamarine-conkies-50426d.netlify.app/">the live preview</a>
+- You can visit <a href="https://comforting-nasturtium-b43a2d.netlify.app/">the live preview</a>
