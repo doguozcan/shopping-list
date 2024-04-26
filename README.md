@@ -5,6 +5,7 @@
 The Shopping List application is a simple, interactive web application built with React.js. It allows users to add, manage, and track shopping items effortlessly. With features like adding new items, adjusting item quantities, marking items as bought, and removing items, managing your shopping list has never been easier. The application state is managed using React's `useState` hook, allowing for stateful logic in functional components. This project also utilizes the FontAwesome library for icons, enhancing the user interface with visually appealing elements.
 
 ## Screenshot
+
 ![shopping-list](https://github.com/doguozcan/shopping-list/assets/76822280/02e00641-79e7-46b8-8a7b-63e5ab880543)
 
 ## Features
